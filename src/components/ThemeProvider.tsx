@@ -43,13 +43,12 @@ function readInitialTheme(): Theme {
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setThemeState] = useState<Theme>("dark");
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const initial = readInitialTheme();
+    // Read whatever the FOUC-prevention script (in <head>) already applied.
+    const html = document.documentElement;
+    const initial: Theme = html.classList.contains("light") ? "light" : "dark";
     setThemeState(initial);
-    applyThemeClass(initial);
-    setMounted(true);
   }, []);
 
   const setTheme = useCallback((t: Theme) => {
@@ -72,12 +71,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   );
 
   return (
-    <ThemeContext.Provider value={value}>
-      {/* Avoid hydration mismatch — render after mount */}
-      <div suppressHydrationWarning data-theme={mounted ? theme : "dark"}>
-        {children}
-      </div>
-    </ThemeContext.Provider>
+    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
   );
 }
 

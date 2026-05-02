@@ -145,6 +145,23 @@ html.light .btn-secondary:hover {
   background: rgba(10, 11, 17, 0.06);
 }
 
+/* Accent text (lime) is unreadable on white — swap to a darker, readable green */
+html.light .text-accent-lime {
+  color: #1f7a3d; /* deep brand-ish green with WCAG AA contrast on white */
+}
+html.light .text-brand-200,
+html.light .text-brand-300 {
+  color: #0e8e4c; /* brand-600 */
+}
+
+/* Light "chip" pills with brand-tinted backgrounds: keep readable accent text */
+html.light .border-brand-500\/40 {
+  border-color: rgba(14, 142, 76, 0.4);
+}
+html.light .bg-brand-500\/10 {
+  background-color: rgba(14, 142, 76, 0.12);
+}
+
 /* Selection */
 html.light ::selection {
   background: rgba(198, 248, 75, 0.55);

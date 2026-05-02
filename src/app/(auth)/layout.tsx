@@ -24,7 +24,7 @@ export default function AuthLayout({
       </div>
 
       {/* Visual panel */}
-      <aside className="relative hidden overflow-hidden border-l border-white/[0.06] bg-gradient-to-br from-brand-700/30 via-ink-800 to-ink-950 lg:block">
+      <aside className="relative hidden overflow-hidden border-l border-white/[0.06] bg-gradient-to-br from-brand-700/30 via-ink-800 to-ink-900 lg:block">
         <div aria-hidden className="absolute inset-0 grid-bg opacity-40" />
         <div aria-hidden className="absolute inset-0 bg-radial-spot opacity-70" />
         <div className="relative z-10 flex h-full flex-col justify-between p-12">
