@@ -62,11 +62,11 @@ export function Hero() {
           </p>
 
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-            <Link href="#start" className="btn-primary">
+            <Link href="/signup" className="btn-primary">
               Start for free
               <ArrowRight className="h-4 w-4" />
             </Link>
-            <Link href="#google" className="btn-secondary">
+            <Link href="/signup" className="btn-secondary">
               <GoogleMark className="h-4 w-4" />
               Sign up with Google
             </Link>

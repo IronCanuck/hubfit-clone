@@ -9,7 +9,7 @@ import { cn } from "@/lib/cn";
 const NAV: { label: string; href: string; menu?: { label: string; desc: string }[] }[] = [
   {
     label: "Platform",
-    href: "#coaching",
+    href: "/#coaching",
     menu: [
       { label: "Coaching", desc: "Training, nutrition, check-ins, habits" },
       { label: "Engagement", desc: "Community, challenges, messaging" },
@@ -18,9 +18,9 @@ const NAV: { label: string; href: string; menu?: { label: string; desc: string }
       { label: "Integrations", desc: "Wearables, Stripe, Zapier" },
     ],
   },
-  { label: "Pricing", href: "#pricing" },
-  { label: "Customers", href: "#customers" },
-  { label: "Resources", href: "#resources" },
+  { label: "Pricing", href: "/pricing" },
+  { label: "Customers", href: "/#customers" },
+  { label: "Resources", href: "/#resources" },
 ];
 
 export function Navbar() {
@@ -64,10 +64,10 @@ export function Navbar() {
         </nav>
 
         <div className="hidden items-center gap-2 md:flex">
-          <Link href="#login" className="btn-ghost">
+          <Link href="/login" className="btn-ghost">
             Log in
           </Link>
-          <Link href="#start" className="btn-primary">
+          <Link href="/signup" className="btn-primary">
             Start for free
           </Link>
         </div>
@@ -95,10 +95,10 @@ export function Navbar() {
               </Link>
             ))}
             <div className="mt-2 flex gap-2">
-              <Link href="#login" className="btn-secondary flex-1">
+              <Link href="/login" className="btn-secondary flex-1">
                 Log in
               </Link>
-              <Link href="#start" className="btn-primary flex-1">
+              <Link href="/signup" className="btn-primary flex-1">
                 Start free
               </Link>
             </div>

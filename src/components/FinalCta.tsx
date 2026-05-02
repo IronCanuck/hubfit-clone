@@ -22,11 +22,11 @@ export function FinalCta() {
           </p>
 
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-            <Link href="#" className="btn-primary">
+            <Link href="/signup" className="btn-primary">
               Start for free
               <ArrowRight className="h-4 w-4" />
             </Link>
-            <Link href="#pricing" className="btn-secondary">
+            <Link href="/pricing" className="btn-secondary">
               See our plans
             </Link>
           </div>
