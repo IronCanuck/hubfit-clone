@@ -6,7 +6,7 @@ import { Footer } from "@/components/Footer";
 import { PricingTiers } from "@/components/PricingTiers";
 
 export const metadata: Metadata = {
-  title: "Pricing — HubFit",
+  title: "Pricing — Podium Lab",
   description:
     "Simple, transparent pricing that scales with your coaching business. Start with a 14-day free trial.",
 };
@@ -60,7 +60,7 @@ export default function PricingPage() {
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-base text-white/65 sm:text-lg">
             Start free. Pay only when you're ready. Every plan includes the
-            full HubFit platform — branded apps, training, nutrition, and
+            full Podium Lab platform — branded apps, training, nutrition, and
             community.
           </p>
         </div>
@@ -140,7 +140,7 @@ export default function PricingPage() {
         <div className="container-max container-px mt-20 sm:mt-28">
           <div className="relative overflow-hidden rounded-3xl border border-white/[0.08] bg-gradient-to-br from-brand-700/30 via-ink-800 to-ink-900 px-6 py-14 text-center sm:px-12">
             <div className="absolute inset-0 -z-10 bg-radial-spot opacity-80" />
-            <h3 className="display-h2">Try HubFit free for 14 days</h3>
+            <h3 className="display-h2">Try Podium Lab free for 14 days</h3>
             <p className="mx-auto mt-4 max-w-xl text-white/65">
               Bring your clients, programs, and content. No credit card required.
             </p>

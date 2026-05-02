@@ -49,7 +49,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         <div
           aria-hidden
           onClick={() => setSidebarOpen(false)}
-          className="fixed inset-0 z-30 bg-ink-950/70 backdrop-blur-sm lg:hidden"
+          className="fixed inset-0 z-30 bg-ink-900/70 backdrop-blur-sm lg:hidden"
         />
       ) : null}
 
@@ -150,7 +150,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             <div className="min-w-0 flex-1">
               <div className="truncate text-sm font-semibold">Cody Fairburn</div>
               <div className="truncate text-[10px] text-white/55">
-                cody@hubfit.local
+                cody@podiumlab.local
               </div>
             </div>
             <Link
@@ -166,7 +166,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
       {/* Main panel */}
       <div className="flex min-h-screen flex-col lg:pl-72">
-        <header className="sticky top-0 z-20 flex h-16 items-center gap-3 border-b border-white/[0.06] bg-ink-950/70 px-4 backdrop-blur-xl sm:px-6 lg:px-8">
+        <header className="sticky top-0 z-20 flex h-16 items-center gap-3 border-b border-white/[0.06] bg-ink-900/70 px-4 backdrop-blur-xl sm:px-6 lg:px-8">
           <button
             onClick={() => setSidebarOpen(true)}
             className="grid h-9 w-9 place-items-center rounded-full border border-white/10 bg-white/[0.04] lg:hidden"

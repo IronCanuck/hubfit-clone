@@ -23,7 +23,7 @@ const REVIEWS = [
     avatar: "JA",
     color: "from-sky-400 to-indigo-500",
     body:
-      "HubFit transformed how I run my coaching business. Cut my admin by 75% and let me focus on what I do best — coaching.",
+      "Podium Lab transformed how I run my coaching business. Cut my admin by 75% and let me focus on what I do best — coaching.",
   },
   {
     name: "Jenny Coached",
@@ -64,7 +64,7 @@ export function Testimonials() {
             </span>
           </h2>
           <p className="mt-5 max-w-2xl text-base text-white/65 sm:text-lg">
-            Join 50,000+ coaches who use HubFit to manage, grow, and scale their
+            Join 50,000+ coaches who use Podium Lab to manage, grow, and scale their
             fitness coaching business.
           </p>
         </div>

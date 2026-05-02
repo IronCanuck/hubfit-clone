@@ -53,7 +53,7 @@ export function IntegrationsSection() {
               </span>
             </>
           }
-          description="Sync wearables, plug into Zapier, and connect HubFit to the tools you already use to run your business."
+          description="Sync wearables, plug into Zapier, and connect Podium Lab to the tools you already use to run your business."
         />
 
         <div className="mt-12 space-y-3">

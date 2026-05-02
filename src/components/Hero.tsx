@@ -57,7 +57,7 @@ export function Hero() {
           </h1>
 
           <p className="mt-6 max-w-2xl text-base text-white/65 sm:text-lg">
-            HubFit makes it easy to build, scale, and automate your fitness
+            Podium Lab makes it easy to build, scale, and automate your fitness
             business — all without being slow or clunky.
           </p>
 
@@ -104,8 +104,8 @@ export function Hero() {
           {[
             {
               k: "50,000+",
-              label: "Coaches Trust HubFit",
-              copy: "Thousands of coaches use HubFit to grow and manage their fitness business.",
+              label: "Coaches Trust Podium Lab",
+              copy: "Thousands of coaches use Podium Lab to grow and manage their fitness business.",
             },
             {
               k: "350+",
@@ -115,7 +115,7 @@ export function Hero() {
             {
               k: "99%",
               label: "Coach Satisfaction",
-              copy: "99% of coaches on HubFit rate their experience as excellent.",
+              copy: "99% of coaches on Podium Lab rate their experience as excellent.",
             },
           ].map((s) => (
             <div key={s.label} className="card card-hover p-6">
@@ -132,7 +132,7 @@ export function Hero() {
 
         <div className="mt-12">
           <p className="mb-4 text-center text-xs font-medium uppercase tracking-[0.18em] text-white/45">
-            Coaches who chose HubFit
+            Coaches who chose Podium Lab
           </p>
           <CoachMarquee />
         </div>

@@ -4,8 +4,8 @@ import { ArrowRight, Mail } from "lucide-react";
 import { AuthForm } from "@/components/AuthForm";
 
 export const metadata: Metadata = {
-  title: "Sign up — HubFit",
-  description: "Create your free HubFit coaching account.",
+  title: "Sign up — Podium Lab",
+  description: "Create your free Podium Lab coaching account.",
 };
 
 export default function SignupPage() {

@@ -1,19 +1,21 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-  content: [
-    "./src/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
+  darkMode: "class",
+  content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
     extend: {
       colors: {
+        // `white`, `ink-500..900` are theme-invertible via CSS variables.
+        // `ink-950` is intentionally STATIC (used as fixed-dark button text).
+        white: "rgb(var(--c-white) / <alpha-value>)",
         ink: {
           950: "#05060A",
-          900: "#0A0B11",
-          800: "#11131C",
-          700: "#1A1D2A",
-          600: "#262A3B",
-          500: "#3A3F55",
+          900: "rgb(var(--c-ink-900) / <alpha-value>)",
+          800: "rgb(var(--c-ink-800) / <alpha-value>)",
+          700: "rgb(var(--c-ink-700) / <alpha-value>)",
+          600: "rgb(var(--c-ink-600) / <alpha-value>)",
+          500: "rgb(var(--c-ink-500) / <alpha-value>)",
         },
         brand: {
           50: "#EAFBF1",
@@ -35,7 +37,12 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["var(--font-inter)", "ui-sans-serif", "system-ui", "sans-serif"],
-        display: ["var(--font-display)", "ui-sans-serif", "system-ui", "sans-serif"],
+        display: [
+          "var(--font-display)",
+          "ui-sans-serif",
+          "system-ui",
+          "sans-serif",
+        ],
       },
       backgroundImage: {
         "grid-fade":

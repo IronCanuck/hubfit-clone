@@ -7,6 +7,7 @@ import {
   TrendingUp,
 } from "lucide-react";
 import { PageHeader } from "@/components/app/PageHeader";
+import { NewTeamButton } from "@/components/app/NewTeamButton";
 
 const CLIENTS = [
   {
@@ -117,6 +118,7 @@ export default function ClientsPage() {
             <button className="btn-secondary text-xs">
               <Filter className="h-3.5 w-3.5" /> Filter
             </button>
+            <NewTeamButton />
             <button className="btn-primary text-xs">
               <Plus className="h-3.5 w-3.5" /> New client
             </button>

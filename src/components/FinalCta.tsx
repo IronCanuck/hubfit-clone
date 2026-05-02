@@ -17,7 +17,7 @@ export function FinalCta() {
             </span>
           </h2>
           <p className="mx-auto mt-5 max-w-xl text-white/65">
-            See why HubFit is the coaching platform of choice for modern fitness
+            See why Podium Lab is the coaching platform of choice for modern fitness
             professionals.
           </p>
 

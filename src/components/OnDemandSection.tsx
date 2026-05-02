@@ -45,7 +45,7 @@ export function OnDemandSection() {
         <figure className="mt-16 flex flex-col items-center text-center">
           <Quote className="h-6 w-6 text-accent-lime" />
           <blockquote className="mt-4 max-w-3xl font-display text-2xl font-medium leading-snug text-white/90 sm:text-3xl">
-            "HubFit completely transformed how I run my coaching business — cut
+            "Podium Lab completely transformed how I run my coaching business — cut
             my admin time by 75% and let me focus on what I do best."
           </blockquote>
           <figcaption className="mt-5 flex items-center gap-3 text-sm">

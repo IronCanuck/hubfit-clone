@@ -1,12 +1,12 @@
-# HubFit Clone
+# Podium Lab
 
-A modern, animated marketing site inspired by [hubfit.io](https://hubfit.io) — the all-in-one fitness coaching platform.
+A modern, animated marketing site for **Podium Lab** — the all-in-one fitness coaching platform.
 
 Built with **Next.js 15**, **React 19**, **Tailwind CSS**, **Framer Motion**, and **lucide-react** icons.
 
 ## Features
 
-The site walks visitors through HubFit's core pillars:
+The site walks visitors through Podium Lab's core pillars:
 
 - **Coaching** — Training, Nutrition, Check-ins, Habits
 - **Engagement** — Community, Challenges, Messaging

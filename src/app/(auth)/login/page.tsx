@@ -3,8 +3,8 @@ import Link from "next/link";
 import { AuthForm } from "@/components/AuthForm";
 
 export const metadata: Metadata = {
-  title: "Log in — HubFit",
-  description: "Log into your HubFit coaching account.",
+  title: "Log in — Podium Lab",
+  description: "Log into your Podium Lab coaching account.",
 };
 
 export default function LoginPage() {
@@ -35,7 +35,7 @@ export default function LoginPage() {
       <AuthForm mode="login" />
 
       <p className="text-center text-sm text-white/55">
-        New to HubFit?{" "}
+        New to Podium Lab?{" "}
         <Link href="/signup" className="font-semibold text-accent-lime hover:underline">
           Create an account
         </Link>

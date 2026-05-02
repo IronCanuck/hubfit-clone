@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { AppShell } from "@/components/app/AppShell";
 
 export const metadata: Metadata = {
-  title: "Dashboard — HubFit",
-  description: "Your HubFit coaching workspace.",
+  title: "Dashboard — Podium Lab",
+  description: "Your Podium Lab coaching workspace.",
 };
 
 export default function AppLayout({

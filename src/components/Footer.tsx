@@ -63,7 +63,7 @@ export function Footer() {
 
         <div className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-white/[0.06] pt-6 sm:flex-row sm:items-center">
           <div className="text-xs text-white/45">
-            © {new Date().getFullYear()} HubFit Clone. Inspired by hubfit.io.
+            © {new Date().getFullYear()} Podium Lab. All rights reserved.
           </div>
           <div className="flex items-center gap-4 text-xs text-white/45">
             <span>Made with care</span>

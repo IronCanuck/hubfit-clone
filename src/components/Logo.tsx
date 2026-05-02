@@ -25,7 +25,7 @@ export function Logo({ className }: { className?: string }) {
         </svg>
       </div>
       <span className="font-display text-lg font-semibold tracking-tight">
-        Hub<span className="text-accent-lime">Fit</span>
+        Podium<span className="text-accent-lime"> Lab</span>
       </span>
     </div>
   );

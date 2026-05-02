@@ -39,12 +39,12 @@ export function Navbar() {
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-all",
         scrolled
-          ? "border-b border-white/[0.06] bg-ink-950/70 backdrop-blur-xl"
+          ? "border-b border-white/[0.06] bg-ink-900/70 backdrop-blur-xl"
           : "border-b border-transparent"
       )}
     >
       <div className="container-max container-px flex h-16 items-center justify-between">
-        <Link href="/" aria-label="HubFit home" className="flex items-center">
+        <Link href="/" aria-label="Podium Lab home" className="flex items-center">
           <Logo />
         </Link>
 
@@ -82,7 +82,7 @@ export function Navbar() {
       </div>
 
       {open ? (
-        <div className="border-t border-white/[0.06] bg-ink-950/95 md:hidden">
+        <div className="border-t border-white/[0.06] bg-ink-900/95 md:hidden">
           <div className="container-max container-px flex flex-col gap-1 py-4">
             {NAV.map((item) => (
               <Link
