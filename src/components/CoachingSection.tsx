@@ -27,24 +27,32 @@ export function CoachingSection() {
             title="Training"
             description="Build workouts, track history, and run every training style: supersets, circuits, intervals, and AMRAP."
             preview={<TrainingPreview />}
+            tone="lime"
+            label="T-01"
           />
           <FeatureCard
             icon={Apple}
             title="Nutrition"
             description="Create meal plans, set macro targets, and let clients log meals with the in-app nutrition tracker."
             preview={<NutritionPreview />}
+            tone="mint"
+            label="N-02"
           />
           <FeatureCard
             icon={CalendarCheck}
             title="Check-ins"
             description="Schedule daily, weekly, bi-weekly, or monthly check-ins. Review everything in a dedicated review inbox."
             preview={<CheckinsPreview />}
+            tone="violet"
+            label="C-03"
           />
           <FeatureCard
             icon={Target}
             title="Habits"
             description="Daily habit tracking that keeps clients accountable. Pick from a ready-made library or build your own."
             preview={<HabitsPreview />}
+            tone="lime"
+            label="H-04"
           />
         </div>
 

@@ -15,6 +15,8 @@ import {
   Users,
   X,
 } from "lucide-react";
+import { IconChrome } from "@/components/lab/IconChrome";
+import { Beaker } from "@/components/lab/icons";
 
 const COLORS = [
   "from-accent-lime to-brand-400",
@@ -165,9 +167,12 @@ export function NewTeamButton() {
                     <ArrowLeft className="h-4 w-4" />
                   </button>
                 ) : (
-                  <span className="grid h-8 w-8 place-items-center rounded-xl bg-gradient-to-br from-accent-lime/30 to-brand-400/20 text-accent-lime">
-                    <Users className="h-4 w-4" />
-                  </span>
+                  <IconChrome
+                    icon={<Beaker className="h-full w-full" />}
+                    tone="lime"
+                    size="sm"
+                    label="TM"
+                  />
                 )}
                 <div>
                   <h2

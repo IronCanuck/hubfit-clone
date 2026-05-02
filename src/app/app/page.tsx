@@ -16,6 +16,7 @@ import {
 import Link from "next/link";
 import { PageHeader } from "@/components/app/PageHeader";
 import { cn } from "@/lib/cn";
+import { IconChrome, BlueprintCorners } from "@/components/lab/IconChrome";
 
 export default function DashboardPage() {
   return (
@@ -43,6 +44,8 @@ export default function DashboardPage() {
             change: "+12",
             up: true,
             icon: Users,
+            tone: "lime" as const,
+            id: "S-01",
           },
           {
             label: "MRR",
@@ -50,6 +53,8 @@ export default function DashboardPage() {
             change: "+8.4%",
             up: true,
             icon: TrendingUp,
+            tone: "mint" as const,
+            id: "S-02",
           },
           {
             label: "Pending check-ins",
@@ -57,6 +62,8 @@ export default function DashboardPage() {
             change: "−3",
             up: false,
             icon: CalendarCheck,
+            tone: "violet" as const,
+            id: "S-03",
           },
           {
             label: "Sessions this week",
@@ -64,19 +71,27 @@ export default function DashboardPage() {
             change: "+19%",
             up: true,
             icon: Dumbbell,
+            tone: "lime" as const,
+            id: "S-04",
           },
         ].map((s) => (
-          <div key={s.label} className="card p-5">
+          <div key={s.label} className="card relative p-5">
+            <BlueprintCorners colorClass="border-white/15" inset={10} size={8} />
             <div className="flex items-start justify-between">
               <div>
-                <div className="text-xs text-white/55">{s.label}</div>
+                <div className="text-[10px] uppercase tracking-[0.14em] text-white/55">
+                  {s.label}
+                </div>
                 <div className="mt-1 font-display text-2xl font-semibold">
                   {s.value}
                 </div>
               </div>
-              <div className="grid h-9 w-9 place-items-center rounded-lg bg-white/[0.04] ring-1 ring-white/[0.06]">
-                <s.icon className="h-4 w-4 text-accent-lime" />
-              </div>
+              <IconChrome
+                icon={<s.icon className="h-full w-full" strokeWidth={1.6} />}
+                tone={s.tone}
+                size="md"
+                label={s.id}
+              />
             </div>
             <div
               className={cn(

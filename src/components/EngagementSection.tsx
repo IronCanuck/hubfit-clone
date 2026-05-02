@@ -28,18 +28,24 @@ export function EngagementSection() {
             title="Community"
             description="An in-app community feed with scheduled posts, polls, reactions, and threads. No Facebook groups needed."
             preview={<CommunityPreview />}
+            tone="violet"
+            label="E-01"
           />
           <FeatureCard
             icon={Trophy}
             title="Challenges"
             description="Launch fitness challenges with live leaderboards, milestone badges, and automatic progress tracking."
             preview={<ChallengesPreview />}
+            tone="lime"
+            label="E-02"
           />
           <FeatureCard
             icon={MessageSquareText}
             title="Messaging"
             description="Chat, voice notes, polls, GIFs, and group threads. Everything you need to stay connected with every client."
             preview={<MessagingPreview />}
+            tone="mint"
+            label="E-03"
           />
         </div>
       </div>

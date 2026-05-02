@@ -27,18 +27,24 @@ export function OnDemandSection() {
             title="Recipe Books"
             description="Build recipe books your clients browse on demand. Full macro breakdowns, instructions, and one-tap meal logging."
             preview={<RecipesPreview />}
+            tone="lime"
+            label="O-01"
           />
           <FeatureCard
             icon={Film}
             title="Workout Studio"
             description="Record and upload follow-along workout videos. Clients stream on-demand from the app, anywhere."
             preview={<StudioPreview />}
+            tone="violet"
+            label="O-02"
           />
           <FeatureCard
             icon={FolderOpen}
             title="Resource Collections"
             description="PDFs, guides, checklists, and documents organised into collections clients can access anytime."
             preview={<ResourcesPreview />}
+            tone="mint"
+            label="O-03"
           />
         </div>
 
