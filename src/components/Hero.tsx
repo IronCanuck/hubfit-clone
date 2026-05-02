@@ -77,7 +77,7 @@ export function Hero() {
               {["#5DD994", "#C6F84B", "#9F7BFF", "#7CF5C2"].map((c, i) => (
                 <span
                   key={i}
-                  className="h-5 w-5 rounded-full border-2 border-ink-950"
+                  className="h-5 w-5 rounded-full border-2 border-ink-900"
                   style={{ background: c }}
                 />
               ))}

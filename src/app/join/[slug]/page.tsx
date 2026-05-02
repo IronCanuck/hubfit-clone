@@ -32,7 +32,7 @@ export default async function JoinTeamPage({
             <Users className="h-3.5 w-3.5" /> Team invite
           </span>
           <h1 className="display-h1 mt-5">
-            Join <span className="text-accent-lime">{teamName}</span> on Hubfit
+            Join <span className="text-accent-lime">{teamName}</span> on Podium Lab
           </h1>
           <p className="mt-5 max-w-xl text-base text-white/65 sm:text-lg">
             Your coach has invited you to train with the team. Create your
@@ -84,7 +84,7 @@ export default async function JoinTeamPage({
             <div>
               <div className="text-base font-semibold">{teamName}</div>
               <div className="text-[11px] text-white/55">
-                Coached on Hubfit · {randomBetween(8, 48)} active athletes
+                Coached on Podium Lab · {randomBetween(8, 48)} active athletes
               </div>
             </div>
           </div>

@@ -24,6 +24,7 @@ import {
   Zap,
 } from "lucide-react";
 import { Logo } from "@/components/Logo";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { cn } from "@/lib/cn";
 
 const NAV: { label: string; href: string; icon: typeof Activity; badge?: string }[] = [
@@ -193,6 +194,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               <Plus className="h-3.5 w-3.5" />
               New client
             </button>
+            <ThemeToggle />
             <button
               aria-label="Notifications"
               className="relative grid h-9 w-9 place-items-center rounded-full border border-white/10 bg-white/[0.04] hover:bg-white/[0.08]"
