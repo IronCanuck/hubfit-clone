@@ -10,6 +10,7 @@ import {
   CalendarCheck,
   ChevronDown,
   Dumbbell,
+  Eye,
   FolderOpen,
   HelpCircle,
   LogOut,
@@ -141,6 +142,22 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               </li>
             ))}
           </ul>
+
+          <div className="mt-4 rounded-2xl border border-accent-lime/20 bg-accent-lime/[0.05] p-3.5">
+            <div className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-accent-lime">
+              <Eye className="h-3.5 w-3.5" />
+              Preview
+            </div>
+            <p className="mt-1.5 text-[12px] text-white/75">
+              See exactly what your athletes see when they log in.
+            </p>
+            <Link
+              href="/client"
+              className="mt-2.5 inline-flex w-full items-center justify-center gap-1.5 rounded-lg border border-white/10 bg-white/[0.06] px-3 py-1.5 text-[11px] font-semibold text-white hover:bg-white/[0.1]"
+            >
+              Open client view
+            </Link>
+          </div>
         </nav>
 
         <div className="border-t border-white/[0.06] p-3">

@@ -22,6 +22,7 @@ const NAV: { label: string; href: string; menu?: { label: string; desc: string }
   { label: "Pricing", href: "/pricing" },
   { label: "Customers", href: "/#customers" },
   { label: "Resources", href: "/#resources" },
+  { label: "Client view", href: "/client" },
 ];
 
 export function Navbar() {

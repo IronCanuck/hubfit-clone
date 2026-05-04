@@ -1,5 +1,6 @@
 import Link from "next/link";
 import {
+  Eye,
   Filter,
   MoreHorizontal,
   Plus,
@@ -233,12 +234,21 @@ export default function ClientsPage() {
                     {c.last}
                   </td>
                   <td className="px-4 py-3.5">
-                    <button
-                      aria-label="More"
-                      className="grid h-8 w-8 place-items-center rounded-md text-white/55 hover:bg-white/[0.05] hover:text-white"
-                    >
-                      <MoreHorizontal className="h-4 w-4" />
-                    </button>
+                    <div className="flex items-center justify-end gap-1">
+                      <Link
+                        href="/client"
+                        className="hidden items-center gap-1 rounded-md border border-white/10 bg-white/[0.04] px-2 py-1 text-[11px] font-medium text-white/75 hover:bg-white/[0.08] hover:text-white sm:inline-flex"
+                      >
+                        <Eye className="h-3 w-3" />
+                        View as
+                      </Link>
+                      <button
+                        aria-label="More"
+                        className="grid h-8 w-8 place-items-center rounded-md text-white/55 hover:bg-white/[0.05] hover:text-white"
+                      >
+                        <MoreHorizontal className="h-4 w-4" />
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}
