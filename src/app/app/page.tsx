@@ -1,3 +1,6 @@
+"use client";
+
+import { useMemo, useState } from "react";
 import {
   Activity,
   ArrowDownRight,
@@ -15,17 +18,235 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { PageHeader } from "@/components/app/PageHeader";
+import { TeamSwitcher, type Team } from "@/components/app/TeamSwitcher";
 import { cn } from "@/lib/cn";
 import { IconChrome, BlueprintCorners } from "@/components/lab/IconChrome";
 
+const TEAMS: Team[] = [
+  {
+    id: "all",
+    name: "All clients",
+    color: "from-accent-lime to-brand-400",
+    count: 142,
+    sport: "Across every team",
+  },
+  {
+    id: "12wk",
+    name: "12-Week Crew",
+    color: "from-pink-400 to-fuchsia-500",
+    count: 38,
+    sport: "Hypertrophy program",
+  },
+  {
+    id: "hybrid",
+    name: "Hybrid Athletes",
+    color: "from-sky-400 to-indigo-500",
+    count: 26,
+    sport: "Strength & conditioning",
+  },
+  {
+    id: "fatloss",
+    name: "Fat Loss Focus",
+    color: "from-emerald-400 to-teal-500",
+    count: 44,
+    sport: "Nutrition-led coaching",
+  },
+  {
+    id: "premium",
+    name: "Premium 1-on-1",
+    color: "from-amber-400 to-orange-500",
+    count: 34,
+    sport: "High-touch coaching",
+  },
+];
+
+const SCHEDULE = [
+  {
+    team: "12wk",
+    t: "8:00 AM",
+    title: "Sarah W. · Push Day",
+    tag: "Live coaching",
+    icon: Dumbbell,
+    color: "from-pink-400 to-fuchsia-500",
+  },
+  {
+    team: "hybrid",
+    t: "9:30 AM",
+    title: "Conor R. · Bi-weekly check-in",
+    tag: "Review needed",
+    icon: CalendarCheck,
+    color: "from-sky-400 to-indigo-500",
+  },
+  {
+    team: "fatloss",
+    t: "11:00 AM",
+    title: "Alice M. · Macro review",
+    tag: "Nutrition",
+    icon: Activity,
+    color: "from-emerald-400 to-teal-500",
+  },
+  {
+    team: "premium",
+    t: "1:00 PM",
+    title: "Charlie B. · Mobility flow",
+    tag: "On-demand",
+    icon: Flame,
+    color: "from-amber-400 to-orange-500",
+  },
+  {
+    team: "12wk",
+    t: "3:30 PM",
+    title: "Chloe T. · Welcome onboarding",
+    tag: "New client",
+    icon: Trophy,
+    color: "from-violet-400 to-purple-500",
+  },
+];
+
+const CHECKINS = [
+  {
+    team: "12wk",
+    n: "Sarah W.",
+    w: "Week 4",
+    d: "Down 1.2lb · Macros on point",
+    c: "from-pink-400 to-fuchsia-500",
+  },
+  {
+    team: "hybrid",
+    n: "Conor R.",
+    w: "Week 8",
+    d: "Sleep dipped · Stress flagged",
+    c: "from-sky-400 to-indigo-500",
+  },
+  {
+    team: "fatloss",
+    n: "Alice M.",
+    w: "Week 2",
+    d: "Loving the program · Q on cardio",
+    c: "from-emerald-400 to-teal-500",
+  },
+  {
+    team: "premium",
+    n: "Charlie B.",
+    w: "Week 12",
+    d: "Hit PR · Wants new program",
+    c: "from-amber-400 to-orange-500",
+  },
+];
+
+const MESSAGES = [
+  {
+    team: "12wk",
+    n: "Sarah W.",
+    m: "Just nailed my bench PR 🎉",
+    c: "from-pink-400 to-fuchsia-500",
+    time: "2m",
+  },
+  {
+    team: "hybrid",
+    n: "Conor R.",
+    m: "Quick Q on tomorrow's session…",
+    c: "from-sky-400 to-indigo-500",
+    time: "12m",
+  },
+  {
+    team: "fatloss",
+    n: "Alice M.",
+    m: "Loving the new meal plan!",
+    c: "from-emerald-400 to-teal-500",
+    time: "1h",
+  },
+  {
+    team: "12wk",
+    n: "Group: 12-Week Crew",
+    m: "Charlie hit a new PR 💪",
+    c: "from-amber-400 to-orange-500",
+    time: "2h",
+  },
+];
+
+const LEADERBOARD = [
+  { team: "12wk", p: 1, n: "Sarah W.", v: "182,400", c: "from-pink-400 to-fuchsia-500" },
+  { team: "hybrid", p: 2, n: "Conor R.", v: "171,920", c: "from-sky-400 to-indigo-500" },
+  { team: "fatloss", p: 3, n: "Alice M.", v: "168,300", c: "from-emerald-400 to-teal-500" },
+  { team: "premium", p: 4, n: "Charlie B.", v: "159,820", c: "from-amber-400 to-orange-500" },
+];
+
+const STATS_BY_TEAM: Record<
+  string,
+  { active: string; mrr: string; mrrChange: string; checkins: string; sessions: string }
+> = {
+  all: { active: "142", mrr: "$12,840", mrrChange: "+8.4%", checkins: "8", sessions: "612" },
+  "12wk": { active: "38", mrr: "$3,420", mrrChange: "+11.2%", checkins: "3", sessions: "168" },
+  hybrid: { active: "26", mrr: "$2,180", mrrChange: "+6.1%", checkins: "2", sessions: "112" },
+  fatloss: { active: "44", mrr: "$3,960", mrrChange: "+9.7%", checkins: "2", sessions: "196" },
+  premium: { active: "34", mrr: "$5,610", mrrChange: "+14.3%", checkins: "1", sessions: "136" },
+};
+
 export default function DashboardPage() {
+  const [teamId, setTeamId] = useState<string>("all");
+  const team = TEAMS.find((t) => t.id === teamId) ?? TEAMS[0];
+
+  const byTeam = <T extends { team: string }>(items: T[]) =>
+    teamId === "all" ? items : items.filter((i) => i.team === teamId);
+
+  const schedule = useMemo(() => byTeam(SCHEDULE), [teamId]);
+  const checkins = useMemo(() => byTeam(CHECKINS), [teamId]);
+  const messages = useMemo(() => byTeam(MESSAGES), [teamId]);
+  const leaderboard = useMemo(() => byTeam(LEADERBOARD), [teamId]);
+
+  const stats = STATS_BY_TEAM[teamId] ?? STATS_BY_TEAM.all;
+
+  const statCards = [
+    {
+      label: teamId === "all" ? "Active clients" : "Team members",
+      value: stats.active,
+      change: "+12",
+      up: true,
+      icon: Users,
+      tone: "lime" as const,
+      id: "S-01",
+    },
+    {
+      label: "MRR",
+      value: stats.mrr,
+      change: stats.mrrChange,
+      up: true,
+      icon: TrendingUp,
+      tone: "mint" as const,
+      id: "S-02",
+    },
+    {
+      label: "Pending check-ins",
+      value: stats.checkins,
+      change: "−3",
+      up: false,
+      icon: CalendarCheck,
+      tone: "violet" as const,
+      id: "S-03",
+    },
+    {
+      label: "Sessions this week",
+      value: stats.sessions,
+      change: "+19%",
+      up: true,
+      icon: Dumbbell,
+      tone: "lime" as const,
+      id: "S-04",
+    },
+  ];
+
+  const scopeLabel =
+    teamId === "all" ? "across your coaching business" : `in ${team.name}`;
+
   return (
     <div className="container-max">
       <PageHeader
         title="Welcome back, Cody 👋"
-        subtitle="Here's what's happening across your coaching business today."
+        subtitle={`Here's what's happening ${scopeLabel} today.`}
         actions={
           <>
+            <TeamSwitcher teams={TEAMS} value={teamId} onChange={setTeamId} />
             <Link href="/app/clients" className="btn-secondary text-xs">
               View clients
             </Link>
@@ -37,44 +258,7 @@ export default function DashboardPage() {
       />
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {[
-          {
-            label: "Active clients",
-            value: "142",
-            change: "+12",
-            up: true,
-            icon: Users,
-            tone: "lime" as const,
-            id: "S-01",
-          },
-          {
-            label: "MRR",
-            value: "$12,840",
-            change: "+8.4%",
-            up: true,
-            icon: TrendingUp,
-            tone: "mint" as const,
-            id: "S-02",
-          },
-          {
-            label: "Pending check-ins",
-            value: "8",
-            change: "−3",
-            up: false,
-            icon: CalendarCheck,
-            tone: "violet" as const,
-            id: "S-03",
-          },
-          {
-            label: "Sessions this week",
-            value: "612",
-            change: "+19%",
-            up: true,
-            icon: Dumbbell,
-            tone: "lime" as const,
-            id: "S-04",
-          },
-        ].map((s) => (
+        {statCards.map((s) => (
           <div key={s.label} className="card relative p-5">
             <BlueprintCorners colorClass="border-white/15" inset={10} size={8} />
             <div className="flex items-start justify-between">
@@ -118,9 +302,9 @@ export default function DashboardPage() {
         <div className="card p-5 lg:col-span-8">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="display-h3">Today's coaching schedule</h2>
+              <h2 className="display-h3">Today&apos;s coaching schedule</h2>
               <p className="mt-1 text-sm text-white/55">
-                7 sessions · 4 check-ins · 3 messages flagged
+                {schedule.length} sessions · {checkins.length} check-ins · {messages.length} messages flagged
               </p>
             </div>
             <Link
@@ -132,64 +316,32 @@ export default function DashboardPage() {
           </div>
 
           <div className="mt-5 space-y-2.5">
-            {[
-              {
-                t: "8:00 AM",
-                title: "Sarah W. · Push Day",
-                tag: "Live coaching",
-                icon: Dumbbell,
-                color: "from-pink-400 to-fuchsia-500",
-              },
-              {
-                t: "9:30 AM",
-                title: "Conor R. · Bi-weekly check-in",
-                tag: "Review needed",
-                icon: CalendarCheck,
-                color: "from-sky-400 to-indigo-500",
-              },
-              {
-                t: "11:00 AM",
-                title: "Alice M. · Macro review",
-                tag: "Nutrition",
-                icon: Activity,
-                color: "from-emerald-400 to-teal-500",
-              },
-              {
-                t: "1:00 PM",
-                title: "Charlie B. · Mobility flow",
-                tag: "On-demand",
-                icon: Flame,
-                color: "from-amber-400 to-orange-500",
-              },
-              {
-                t: "3:30 PM",
-                title: "Chloe T. · Welcome onboarding",
-                tag: "New client",
-                icon: Trophy,
-                color: "from-violet-400 to-purple-500",
-              },
-            ].map((s) => (
-              <div
-                key={s.title}
-                className="flex items-center gap-3 rounded-xl border border-white/[0.06] bg-white/[0.025] px-3 py-2.5"
-              >
-                <div className="w-16 text-xs font-medium tabular-nums text-white/55">
-                  {s.t}
-                </div>
+            {schedule.length === 0 ? (
+              <EmptyRow message={`No sessions scheduled for ${team.name} today.`} />
+            ) : (
+              schedule.map((s) => (
                 <div
-                  className={`grid h-9 w-9 place-items-center rounded-full bg-gradient-to-br ${s.color}`}
+                  key={s.title}
+                  className="flex items-center gap-3 rounded-xl border border-white/[0.06] bg-white/[0.025] px-3 py-2.5"
                 >
-                  <s.icon className="h-4 w-4 text-ink-950" />
+                  <div className="w-16 text-xs font-medium tabular-nums text-white/55">
+                    {s.t}
+                  </div>
+                  <div
+                    className={`grid h-9 w-9 place-items-center rounded-full bg-gradient-to-br ${s.color}`}
+                  >
+                    <s.icon className="h-4 w-4 text-ink-950" />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <div className="truncate text-sm font-medium">{s.title}</div>
+                    <div className="text-[11px] text-white/55">{s.tag}</div>
+                  </div>
+                  <button className="grid h-7 w-7 place-items-center rounded-md text-white/55 hover:bg-white/[0.05] hover:text-white">
+                    <ChevronRight className="h-4 w-4" />
+                  </button>
                 </div>
-                <div className="min-w-0 flex-1">
-                  <div className="truncate text-sm font-medium">{s.title}</div>
-                  <div className="text-[11px] text-white/55">{s.tag}</div>
-                </div>
-                <button className="grid h-7 w-7 place-items-center rounded-md text-white/55 hover:bg-white/[0.05] hover:text-white">
-                  <ChevronRight className="h-4 w-4" />
-                </button>
-              </div>
-            ))}
+              ))
+            )}
           </div>
         </div>
 
@@ -197,12 +349,16 @@ export default function DashboardPage() {
         <div className="card flex flex-col p-5 lg:col-span-4">
           <div>
             <h2 className="display-h3">Revenue</h2>
-            <p className="mt-1 text-sm text-white/55">Last 7 months</p>
+            <p className="mt-1 text-sm text-white/55">
+              Last 7 months · {team.name}
+            </p>
           </div>
           <div className="mt-5 flex items-baseline gap-2">
-            <div className="font-display text-3xl font-semibold">$48,240</div>
+            <div className="font-display text-3xl font-semibold">
+              {teamId === "all" ? "$48,240" : stats.mrr}
+            </div>
             <span className="chip border-brand-500/40 bg-brand-500/10 text-brand-200">
-              +12%
+              {stats.mrrChange}
             </span>
           </div>
           <div className="mt-5 flex h-32 items-end gap-1.5">
@@ -234,7 +390,7 @@ export default function DashboardPage() {
             <div>
               <h2 className="display-h3">Check-ins to review</h2>
               <p className="mt-1 text-sm text-white/55">
-                8 new responses waiting
+                {checkins.length} new {checkins.length === 1 ? "response" : "responses"} waiting
               </p>
             </div>
             <Link
@@ -245,56 +401,35 @@ export default function DashboardPage() {
             </Link>
           </div>
           <div className="mt-5 space-y-2">
-            {[
-              {
-                n: "Sarah W.",
-                w: "Week 4",
-                d: "Down 1.2lb · Macros on point",
-                c: "from-pink-400 to-fuchsia-500",
-              },
-              {
-                n: "Conor R.",
-                w: "Week 8",
-                d: "Sleep dipped · Stress flagged",
-                c: "from-sky-400 to-indigo-500",
-              },
-              {
-                n: "Alice M.",
-                w: "Week 2",
-                d: "Loving the program · Q on cardio",
-                c: "from-emerald-400 to-teal-500",
-              },
-              {
-                n: "Charlie B.",
-                w: "Week 12",
-                d: "Hit PR · Wants new program",
-                c: "from-amber-400 to-orange-500",
-              },
-            ].map((c) => (
-              <div
-                key={c.n}
-                className="flex items-center gap-3 rounded-xl border border-white/[0.06] bg-white/[0.025] px-3 py-2.5"
-              >
+            {checkins.length === 0 ? (
+              <EmptyRow message={`No pending check-ins for ${team.name}.`} />
+            ) : (
+              checkins.map((c) => (
                 <div
-                  className={`grid h-9 w-9 place-items-center rounded-full bg-gradient-to-br ${c.c} text-xs font-bold text-ink-950`}
+                  key={c.n}
+                  className="flex items-center gap-3 rounded-xl border border-white/[0.06] bg-white/[0.025] px-3 py-2.5"
                 >
-                  {c.n
-                    .split(" ")
-                    .map((p) => p[0])
-                    .join("")}
-                </div>
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-baseline gap-2">
-                    <span className="text-sm font-medium">{c.n}</span>
-                    <span className="text-[10px] text-white/55">{c.w}</span>
+                  <div
+                    className={`grid h-9 w-9 place-items-center rounded-full bg-gradient-to-br ${c.c} text-xs font-bold text-ink-950`}
+                  >
+                    {c.n
+                      .split(" ")
+                      .map((p) => p[0])
+                      .join("")}
                   </div>
-                  <div className="truncate text-[11px] text-white/55">{c.d}</div>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-sm font-medium">{c.n}</span>
+                      <span className="text-[10px] text-white/55">{c.w}</span>
+                    </div>
+                    <div className="truncate text-[11px] text-white/55">{c.d}</div>
+                  </div>
+                  <button className="chip border-brand-500/40 bg-brand-500/10 text-[10px] text-brand-200">
+                    Review
+                  </button>
                 </div>
-                <button className="chip border-brand-500/40 bg-brand-500/10 text-[10px] text-brand-200">
-                  Review
-                </button>
-              </div>
-            ))}
+              ))
+            )}
           </div>
         </div>
 
@@ -302,34 +437,33 @@ export default function DashboardPage() {
         <div className="card p-5 lg:col-span-4">
           <div className="flex items-center justify-between">
             <h2 className="display-h3">Messages</h2>
-            <span className="chip">3 new</span>
+            <span className="chip">{messages.length} new</span>
           </div>
           <div className="mt-5 space-y-2">
-            {[
-              { n: "Sarah W.", m: "Just nailed my bench PR 🎉", c: "from-pink-400 to-fuchsia-500", time: "2m" },
-              { n: "Conor R.", m: "Quick Q on tomorrow's session…", c: "from-sky-400 to-indigo-500", time: "12m" },
-              { n: "Alice M.", m: "Loving the new meal plan!", c: "from-emerald-400 to-teal-500", time: "1h" },
-              { n: "Group: 12-Week Crew", m: "Charlie hit a new PR 💪", c: "from-amber-400 to-orange-500", time: "2h" },
-            ].map((c) => (
-              <Link
-                key={c.n}
-                href="/app/messages"
-                className="flex items-start gap-3 rounded-xl border border-white/[0.06] bg-white/[0.025] px-3 py-2.5 hover:bg-white/[0.05]"
-              >
-                <div
-                  className={`grid h-9 w-9 place-items-center rounded-full bg-gradient-to-br ${c.c} text-xs font-bold text-ink-950`}
+            {messages.length === 0 ? (
+              <EmptyRow message={`No new messages from ${team.name}.`} />
+            ) : (
+              messages.map((c) => (
+                <Link
+                  key={c.n}
+                  href="/app/messages"
+                  className="flex items-start gap-3 rounded-xl border border-white/[0.06] bg-white/[0.025] px-3 py-2.5 hover:bg-white/[0.05]"
                 >
-                  <MessageCircle className="h-3.5 w-3.5" />
-                </div>
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-baseline justify-between gap-2">
-                    <span className="truncate text-sm font-medium">{c.n}</span>
-                    <span className="text-[10px] text-white/45">{c.time}</span>
+                  <div
+                    className={`grid h-9 w-9 place-items-center rounded-full bg-gradient-to-br ${c.c} text-xs font-bold text-ink-950`}
+                  >
+                    <MessageCircle className="h-3.5 w-3.5" />
                   </div>
-                  <div className="truncate text-[11px] text-white/55">{c.m}</div>
-                </div>
-              </Link>
-            ))}
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-baseline justify-between gap-2">
+                      <span className="truncate text-sm font-medium">{c.n}</span>
+                      <span className="text-[10px] text-white/45">{c.time}</span>
+                    </div>
+                    <div className="truncate text-[11px] text-white/55">{c.m}</div>
+                  </div>
+                </Link>
+              ))
+            )}
           </div>
         </div>
 
@@ -339,32 +473,33 @@ export default function DashboardPage() {
             <Trophy className="h-4 w-4 text-accent-lime" />
             <h2 className="display-h3 text-base">March Step Challenge</h2>
           </div>
-          <p className="mt-1 text-xs text-white/55">124 clients · 8 days left</p>
+          <p className="mt-1 text-xs text-white/55">
+            {leaderboard.length} {leaderboard.length === 1 ? "client" : "clients"} · 8 days left
+          </p>
           <div className="mt-5 space-y-2">
-            {[
-              { p: 1, n: "Sarah W.", v: "182,400", c: "from-pink-400 to-fuchsia-500" },
-              { p: 2, n: "Conor R.", v: "171,920", c: "from-sky-400 to-indigo-500" },
-              { p: 3, n: "Alice M.", v: "168,300", c: "from-emerald-400 to-teal-500" },
-              { p: 4, n: "Charlie B.", v: "159,820", c: "from-amber-400 to-orange-500" },
-            ].map((u) => (
-              <div
-                key={u.n}
-                className="flex items-center gap-2 rounded-md border border-white/[0.05] bg-white/[0.025] px-2 py-1.5"
-              >
-                <span className="w-4 text-[10px] font-bold text-white/55">
-                  #{u.p}
-                </span>
+            {leaderboard.length === 0 ? (
+              <EmptyRow message={`No entries from ${team.name} yet.`} compact />
+            ) : (
+              leaderboard.map((u, i) => (
                 <div
-                  className={`grid h-6 w-6 place-items-center rounded-full bg-gradient-to-br ${u.c} text-[9px] font-bold text-ink-950`}
+                  key={u.n}
+                  className="flex items-center gap-2 rounded-md border border-white/[0.05] bg-white/[0.025] px-2 py-1.5"
                 >
-                  {u.n.split(" ").map((p) => p[0]).join("")}
+                  <span className="w-4 text-[10px] font-bold text-white/55">
+                    #{i + 1}
+                  </span>
+                  <div
+                    className={`grid h-6 w-6 place-items-center rounded-full bg-gradient-to-br ${u.c} text-[9px] font-bold text-ink-950`}
+                  >
+                    {u.n.split(" ").map((p) => p[0]).join("")}
+                  </div>
+                  <div className="text-[11px] font-medium">{u.n}</div>
+                  <div className="ml-auto text-[10px] tabular-nums text-white/65">
+                    {u.v}
+                  </div>
                 </div>
-                <div className="text-[11px] font-medium">{u.n}</div>
-                <div className="ml-auto text-[10px] tabular-nums text-white/65">
-                  {u.v}
-                </div>
-              </div>
-            ))}
+              ))
+            )}
           </div>
           <Link
             href="/app/challenges"
@@ -380,7 +515,7 @@ export default function DashboardPage() {
             <div>
               <h2 className="display-h3">Habits this week</h2>
               <p className="mt-1 text-sm text-white/55">
-                Aggregate completion across active clients
+                Aggregate completion across {team.name.toLowerCase()}
               </p>
             </div>
             <Link href="#" className="text-xs text-accent-lime hover:underline">
@@ -420,6 +555,25 @@ export default function DashboardPage() {
           </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+function EmptyRow({
+  message,
+  compact,
+}: {
+  message: string;
+  compact?: boolean;
+}) {
+  return (
+    <div
+      className={cn(
+        "flex items-center justify-center rounded-xl border border-dashed border-white/[0.08] bg-white/[0.015] text-center text-[11px] text-white/45",
+        compact ? "px-3 py-3" : "px-3 py-5"
+      )}
+    >
+      {message}
     </div>
   );
 }
