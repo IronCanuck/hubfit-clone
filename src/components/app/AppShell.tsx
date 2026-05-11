@@ -16,7 +16,6 @@ import {
   LogOut,
   Menu,
   MessageCircle,
-  Plus,
   Search,
   Settings,
   Trophy,
@@ -26,6 +25,7 @@ import {
 } from "lucide-react";
 import { Logo } from "@/components/Logo";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { NewClientButton } from "@/components/app/NewClientButton";
 import { cn } from "@/lib/cn";
 
 const NAV: { label: string; href: string; icon: typeof Activity; badge?: string }[] = [
@@ -207,10 +207,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           </div>
 
           <div className="ml-auto flex items-center gap-2">
-            <button className="hidden btn-primary text-xs sm:inline-flex">
-              <Plus className="h-3.5 w-3.5" />
-              New client
-            </button>
+            <NewClientButton hideOnMobile />
             <ThemeToggle />
             <button
               aria-label="Notifications"

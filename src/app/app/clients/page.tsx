@@ -3,12 +3,12 @@ import {
   Eye,
   Filter,
   MoreHorizontal,
-  Plus,
   Search,
   TrendingUp,
 } from "lucide-react";
 import { PageHeader } from "@/components/app/PageHeader";
 import { NewTeamButton } from "@/components/app/NewTeamButton";
+import { NewClientButton } from "@/components/app/NewClientButton";
 
 const CLIENTS = [
   {
@@ -120,9 +120,7 @@ export default function ClientsPage() {
               <Filter className="h-3.5 w-3.5" /> Filter
             </button>
             <NewTeamButton />
-            <button className="btn-primary text-xs">
-              <Plus className="h-3.5 w-3.5" /> New client
-            </button>
+            <NewClientButton />
           </>
         }
       />
